@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\André Luna\\Desktop\\New folder\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj": {}
+    "C:\\Users\\André Luna\\Desktop\\concessionaria-app\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\André Luna\\Desktop\\New folder\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj": {
+    "C:\\Users\\André Luna\\Desktop\\concessionaria-app\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\André Luna\\Desktop\\New folder\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\André Luna\\Desktop\\concessionaria-app\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj",
         "projectName": "ConcessionariaApp.Domain",
-        "projectPath": "C:\\Users\\André Luna\\Desktop\\New folder\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj",
+        "projectPath": "C:\\Users\\André Luna\\Desktop\\concessionaria-app\\ConcessionariaApp.Domain\\ConcessionariaApp.Domain.csproj",
         "packagesPath": "C:\\Users\\André Luna\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\André Luna\\Desktop\\New folder\\ConcessionariaApp.Domain\\obj\\",
+        "outputPath": "C:\\Users\\André Luna\\Desktop\\concessionaria-app\\ConcessionariaApp.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
