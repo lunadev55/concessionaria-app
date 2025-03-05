@@ -1,0 +1,125 @@
+﻿@using ConcessionariaApp.Application.Dtos
+@model ConcessionariaDto
+
+@{
+    ViewData["Title"] = "Criar Concessionária";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0 text-center">Criar Concessionária</h2>
+                </div>
+                <div class="card-body">
+                    <form id="concessionariaForm" method="post" novalidate>
+                        <div class="mb-3">
+                            <label for="Nome" class="form-label">Nome</label>
+                            <input type="text" id="Nome" name="Nome" class="form-control" required />
+                            <div class="invalid-feedback">O nome é obrigatório.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Cidade" class="form-label">Cidade</label>
+                            <input type="text" id="Cidade" name="Cidade" class="form-control" required />
+                            <div class="invalid-feedback">A cidade é obrigatória.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Estado" class="form-label">Estado</label>
+                            <input type="text" id="Estado" name="Estado" class="form-control" required />
+                            <div class="invalid-feedback">O estado é obrigatório.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Endereco" class="form-label">Endereço</label>
+                            <input type="text" id="Endereco" name="Endereco" class="form-control" required />
+                            <div class="invalid-feedback">O endereço é obrigatório.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="CEP" class="form-label">CEP</label>
+                            <input type="text" id="CEP" name="CEP" class="form-control" required pattern="\d{5}-\d{3}" />
+                            <div class="invalid-feedback">Digite um CEP válido (ex: 12345-678).</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Capacidade" class="form-label">Capacidade</label>
+                            <input type="number" id="Capacidade" name="Capacidade" class="form-control" required min="1" />
+                            <div class="invalid-feedback">A capacidade deve ser um número positivo.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Telefone" class="form-label">Telefone</label>
+                            <input type="tel" id="Telefone" name="Telefone" class="form-control" required pattern="\(\d{2}\) \d{4,5}-\d{4}" />
+                            <div class="invalid-feedback">Digite um telefone válido (ex: (81) 99999-9999).</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" id="Email" name="Email" class="form-control" required />
+                            <div class="invalid-feedback">Digite um email válido.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Criar</button>
+                        <a asp-action="Index" class="btn btn-danger w-100 mt-2">Cancelar</a>
+                    </form>
+
+                    <div id="message" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById("concessionariaForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        let form = $(this);
+        let isValid = true;
+
+        form.find("input").removeClass("is-invalid");
+
+        form.find("input[required]").each(function() {
+            if (!$(this).val()) {
+                $(this).addClass("is-invalid");
+                isValid = false;
+            }
+        });
+
+        if (!isValid) return;
+
+        let concessionaria = {
+            nomeConcessionaria: $("#Nome").val(),
+            cidade: $("#Cidade").val(),
+            estado: $("#Estado").val(),
+            endereco: $("#Endereco").val(),
+            cep: $("#CEP").val(),
+            capacidadeMaximaVeiculos: parseInt($("#Capacidade").val()),
+            telefone: $("#Telefone").val(),
+            email: $("#Email").val()
+        };
+
+        try {
+            const response = await fetch("/concessionaria", {
+                method: "POST",
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                body: JSON.stringify(concessionaria)
+            });
+
+            if (response.ok) {
+                $("#message").html(`<div class="alert alert-success">Concessionária criada com sucesso! Redirecionando...</div>`);
+                setTimeout(() => window.location.href = "/concessionaria", 3000);
+            } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.errors ? JSON.stringify(errorData.errors) : errorData.message || "Erro desconhecido.";
+                $("#message").html(`<div class="alert alert-danger">Erro ao criar concessionária: ${errorMessage}</div>`);
+            }
+        } catch (error) {
+            $("#message").html(`<div class="alert alert-danger">Erro ao conectar com o servidor.</div>`);
+        }
+    });
+</script>

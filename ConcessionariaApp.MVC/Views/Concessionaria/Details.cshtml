@@ -1,0 +1,31 @@
+﻿@using ConcessionariaApp.Application.Dtos
+@model ConcessionariaDto
+
+@{
+    ViewData["Title"] = "Detalhes da Concessionaria";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Detalhes do Concessionária</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Nome:</strong> @Model.NomeConcessionaria</li>
+                <li class="list-group-item"><strong>Cidade:</strong> @Model.Cidade</li>
+                <li class="list-group-item"><strong>Capacidade:</strong> @Model.CapacidadeMaximaVeiculos</li>
+                <li class="list-group-item"><strong>Telefone:</strong> @Model.Telefone</li>
+                <li class="list-group-item"><strong>Email:</strong> @Model.Email</li>
+            </ul>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>

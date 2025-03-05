@@ -1,0 +1,98 @@
+﻿@using ConcessionariaApp.Application.Dtos
+@model VeiculoDto
+
+@{
+    ViewData["Title"] = "Editar Veículo";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Editar Veículo</h2>
+        </div>
+        <div class="card-body">
+            <form id="veiculoForm" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label for="Modelo" class="form-label">Modelo</label>
+                    <input type="text" asp-for="Modelo" id="Modelo" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="AnoFabricacao" class="form-label">Ano de Fabricação</label>
+                    <input type="number" asp-for="AnoFabricacao" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Preco" class="form-label">Preço</label>
+                    <input type="number" asp-for="Preco" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Tipo" class="form-label">Tipo de Veículo</label>
+                    <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<ConcessionariaApp.Models.Enums.TipoVeiculo>()">
+                        <option value="">Selecione o Tipo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Descricao" class="form-label">Descrição</label>
+                    <textarea asp-for="Descricao" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FabricanteID" class="form-label"></label>
+                    <select asp-for="FabricanteID" class="form-select" asp-items="ViewBag.Fabricantes">
+                        <option value="">Selecione um Fabricante</option>
+                    </select>
+                    <span asp-validation-for="FabricanteID" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Salvar Alterações</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
+                </div>
+            </form>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success mt-3">@TempData["SuccessMessage"]</div>
+            }
+
+            <div id="message" class="mt-3"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById("veiculoForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        let veiculoDto = {
+            id: $("#Id").val(),
+            modelo: $("#Modelo").val(),
+            anoFabricacao: parseInt($("#AnoFabricacao").val()),
+            preco: parseFloat($("#Preco").val()),
+            tipo: parseInt($("#Tipo").val()),
+            descricao: $("#Descricao").val(),
+            fabricanteID: parseInt($("#FabricanteID").val())
+        };
+
+        const response = await fetch(`/veiculo/${veiculoDto.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(veiculoDto)
+        });
+
+        if (response.ok) {
+            $("#message").html(`<div class="alert alert-success">Veículo atualizado com sucesso! Redirecionando...</div>`);
+            setTimeout(() => { window.location.href = "/veiculo"; }, 3000);
+        } else {
+            const errorData = await response.json();
+            const errorMessage = errorData.errors ? JSON.stringify(errorData.errors) : errorData.message || "Erro desconhecido.";
+            $("#message").html(`<div class="alert alert-danger">Erro ao editar veículo: ${errorMessage}</div>`);
+        }
+    });
+</script>

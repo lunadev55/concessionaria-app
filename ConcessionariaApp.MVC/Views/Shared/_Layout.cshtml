@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ConcessionariaApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/dark-theme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-warning fs-4" asp-controller="Home" asp-action="Index">
+                    🚗 ConcessionariaApp
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-light fs-5 py-2" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light fs-5 py-2" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <button class="btn btn-outline-danger fs-5 py-2" id="logoutButton">
+                                        <i class="bi bi-box-arrow-right"></i> Sair
+                                    </button>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a id="loginLink" class="btn btn-warning text-dark fs-5 py-2" asp-controller="Auth" asp-action="Index">Login</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container flex-grow-1 my-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top border-secondary text-muted text-center py-4 bg-black mt-auto">
+        <div class="container">
+            <span class="fs-5">&copy; 2025 - ConcessionariaApp |</span>
+            <a asp-controller="Home" asp-action="Privacy" class="text-warning fs-5">Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem("token");
+        if (token) {
+            document.getElementById("loginLink").style.display = "none";
+            document.getElementById("logoutButton").style.display = "inline-block";
+        }
+    });
+
+    document.getElementById("logoutButton")?.addEventListener("click", async function () {
+        await fetch("/auth/logout", { method: "POST", credentials: "include" });
+        localStorage.removeItem("token");
+        window.location.href = "/Auth";
+    });
+</script>

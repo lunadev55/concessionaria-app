@@ -1,0 +1,81 @@
+﻿@using ConcessionariaApp.Application.Dtos
+
+@model IEnumerable<VendaDto>
+
+@{
+    ViewData["Title"] = "Lista de Vendas";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Vendas</h2>
+
+    @* <a asp-action="Create" class="btn btn-primary mb-3">
+        <i class="bi bi-plus-lg"></i> Nova Venda
+    </a> *@
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Veículo</th>
+                <th>Preço</th>
+                <th>Data da Venda</th>
+                <th>Concessionária</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var venda in Model)
+                {
+                    <tr>
+                        <td>@venda.Id</td>
+                        <td>@venda.Cliente?.Nome</td>
+                        <td>@venda.Veiculo?.Modelo</td>
+                        <td>@venda.PrecoVenda.ToString("C")</td>
+                        <td>@venda.DataVenda.ToString("dd/MM/yyyy")</td>
+                        <td>@venda.Concessionaria?.NomeConcessionaria</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@venda.Id" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>                            
+                            <button type="submit" onclick="detalhesVenda(@venda.Id)" class="btn btn-info btn-sm">
+                                <i class="bi bi-trash"></i> Detalhes
+                            </button>
+                            <button type="submit" onclick="deleteVenda(@venda.Id)" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Excluir
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }            
+        </tbody>
+    </table>
+</div>
+<p>
+    <a asp-controller="Venda" asp-action="Create" class="btn btn-primary">Nova Venda</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Cancelar</a>
+</p>
+
+<script>
+    function deleteVenda(id) {
+        if (confirm("Tem certeza que deseja excluir esta venda?")) {
+            fetch(`/Venda/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert("Erro ao excluir a venda.");
+                }
+            });
+        }
+    }
+    function detalhesVenda(id) {
+        window.location.href = `/Venda/details/${id}`;
+    }
+</script>
+

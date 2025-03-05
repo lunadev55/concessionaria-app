@@ -1,0 +1,132 @@
+﻿@using ConcessionariaApp.Application.Dtos
+
+@model VendaDto
+
+@{
+    ViewData["Title"] = "Registrar Venda";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Registrar Venda</h2>
+
+    <form id="vendaForm" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ClienteNome">Nome do Cliente</label>
+                    <input type="text" id="ClienteNome" name="ClienteNome" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ClienteCPF">CPF do Cliente</label>
+                    <input type="text" id="ClienteCPF" name="ClienteCPF" class="form-control cpf-mask" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ClienteEmail">Email do Cliente</label>
+                    <input type="email" id="ClienteEmail" name="ClienteEmail" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ClienteTelefone">Telefone do Cliente</label>
+                    <input type="tel" id="ClienteTelefone" name="ClienteTelefone" class="form-control phone-mask" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="VeiculoId">Veículo</label>
+                    <select id="VeiculoId" name="VeiculoId" class="form-control" required>
+                        <option value="">Selecione um veículo</option>
+                        @foreach (var veiculo in ViewBag.Veiculos)
+                        {
+                            <option value="@veiculo.Id">@veiculo.Modelo - @veiculo.AnoFabricacao - R$ @veiculo.Preco</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ConcessionariaId">Concessionária</label>
+                    <select id="ConcessionariaId" name="ConcessionariaId" class="form-control" required>
+                        <option value="">Selecione uma concessionária</option>
+                        @foreach (var concessionaria in ViewBag.Concessionarias)
+                        {
+                            <option value="@concessionaria.Id">@concessionaria.NomeConcessionaria</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="PrecoVenda">Preço da Venda</label>
+                    <input type="number" id="PrecoVenda" name="PrecoVenda" class="form-control" step="0.01" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Protocolo">Protocolo</label>
+                    <input type="text" id="Protocolo" name="Protocolo" class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Registrar Venda</button>
+    </form>
+
+    <div id="message" class="mt-3"></div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-mask/dist/jquery.mask.min.js"></script>
+
+<script>
+    // masks nao estao funcionando
+    $(document).ready(function () {
+        $('.cpf-mask').mask('000.000.000-00'); 
+        $('.phone-mask').mask('(00) 00000-0000'); 
+        $('.money-mask').mask('R$ 000.000.000,00', { reverse: true }); 
+    });
+
+    $("#vendaForm").on("submit", async function(event) {
+        event.preventDefault();
+
+        let precoVendaTexto = $("#PrecoVenda").val().replace("R$ ", "").replace(/\./g, "").replace(",", ".");
+
+
+        let venda = {
+            Cliente: {
+                Nome: $("#ClienteNome").val(),
+                CPF: $("#ClienteCPF").val().replace(/\D/g, ''), 
+                Telefone: $("#ClienteTelefone").val()
+            },
+            VeiculoID: parseInt($("#VeiculoId").val()),
+            ConcessionariaID: parseInt($("#ConcessionariaId").val()),
+            PrecoVenda: parseFloat(precoVendaTexto),
+            Protocolo: $("#Protocolo").val()
+        };
+
+        const response = await fetch("/Venda/Create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(venda)
+        });
+
+        if (response.ok) {
+            $("#message").html(`<div class="alert alert-success">Venda registrada com sucesso! Redirecionando...</div>`);
+            setTimeout(() => window.location.href = "/Venda", 3000);
+        } else {
+            const errorData = await response.json();
+            $("#message").html(`<div class="alert alert-danger">Erro: ${errorData.message}</div>`);
+        }
+    });
+</script>

@@ -1,0 +1,105 @@
+﻿@using ConcessionariaApp.Application.Dtos
+@model ConcessionariaDto
+
+@{
+    ViewData["Title"] = "Editar Concessionária";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-warning text-white">
+            <h2 class="mb-0">Editar Concessionária</h2>
+        </div>
+        <div class="card-body">
+            <form id="concessionariaForm" method="post">
+                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label for="Nome" class="form-label">Nome</label>
+                    <input type="text" id="Nome" name="Nome" class="form-control" value="@Model.NomeConcessionaria" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Cidade" class="form-label">Cidade</label>
+                        <input type="text" id="Cidade" name="Cidade" class="form-control" value="@Model.Cidade" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Estado" class="form-label">Estado</label>
+                        <input type="text" id="Estado" name="Estado" class="form-control" value="@Model.Estado" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Endereco" class="form-label">Endereço</label>
+                    <input type="text" id="Endereco" name="Endereco" class="form-control" value="@Model.Endereco" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="CEP" class="form-label">CEP</label>
+                        <input type="text" id="CEP" name="CEP" class="form-control" value="@Model.CEP" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Capacidade" class="form-label">Capacidade</label>
+                        <input type="number" id="Capacidade" name="Capacidade" class="form-control" value="@Model.CapacidadeMaximaVeiculos" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Telefone" class="form-label">Telefone</label>
+                        <input type="tel" id="Telefone" name="Telefone" class="form-control" value="@Model.Telefone" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="/concessionaria" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-warning">Salvar alterações</button>
+                </div>
+            </form>
+
+            <div id="message" class="mt-3"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById("concessionariaForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        let concessionaria = {
+            id: $("#Id").val(),
+            nomeConcessionaria: $("#Nome").val(),
+            cidade: $("#Cidade").val(),
+            endereco: $("#Endereco").val(),
+            estado: $("#Estado").val(),
+            cep: $("#CEP").val(),
+            capacidadeMaximaVeiculos: parseInt($("#Capacidade").val()),
+            telefone: $("#Telefone").val(),
+            email: $("#Email").val()
+        };
+
+        const response = await fetch(`/concessionaria/${concessionaria.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(concessionaria)
+        });
+
+        if (response.ok) {
+            $("#message").html(`<div class="alert alert-success">Concessionária editada com sucesso! Redirecionando para listagem...</div>`);
+            setTimeout(() => {
+                window.location.href = "/concessionaria";
+            }, 3000);
+        } else {
+            const errorData = await response.json();
+            const errorMessage = errorData.errors ? JSON.stringify(errorData.errors) : errorData.message || "Erro desconhecido.";
+            $("#message").html(`<div class="alert alert-danger">Erro ao editar concessionária: ${errorMessage}</div>`);
+        }
+    });
+</script>

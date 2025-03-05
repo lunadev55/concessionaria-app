@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<style>
+    .vehicle-card {
+        background-color: #222;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        padding: 15px;
+        color: #fff;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .vehicle-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .vehicle-card h5 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .vehicle-card p {
+        font-size: 14px;
+        color: #bbb;
+        min-height: 40px;
+    }
+
+    .btn-details {
+        background-color: #ffbf00;
+        color: #000;
+        border: none;
+        padding: 8px 12px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="container text-center mt-5">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Olá, <span class="text-warning">@User.Identity.Name</span>.</h1>
+        <hr class="my-4" />
+        <h2 class="text-success">Bem-vindo ao Sistema de Gestão de Concessionárias</h2>
+        <p class="lead">Gerencie veículos, concessionárias e vendas de forma eficiente.</p>
+        <hr class="my-4" />
+
+        @await Html.PartialAsync("_DashboardLinks")
+    }
+    else
+    {
+        <h1 class="fw-bold text-warning">Bem-vindo ao Sistema de Gestão de Concessionárias 🚗</h1>
+        <p class="lead text-light">
+            Encontre os melhores veículos com os melhores preços. Explore nossa plataforma e descubra o carro dos seus sonhos!
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a class="btn btn-warning btn-lg fw-bold" asp-controller="Auth" asp-action="Index">
+                <i class="bi bi-person-fill"></i> Faça Login
+            </a>
+            <a class="btn btn-outline-light btn-lg fw-bold" asp-controller="Auth" asp-action="Register">
+                <i class="bi bi-person-plus"></i> Cadastrar-se
+            </a>
+        </div>
+
+        <div class="row mt-5">
+            <h2 class="text-warning mb-4">🚘 Veículos em Destaque</h2>
+
+            <div class="col-md-4">
+                <div class="vehicle-card">
+                    <img src="~/assets/images/corolla-2022.jpg" alt="Toyota Corolla 2022">
+                    <h5>Toyota Corolla 2022</h5>
+                    <p>R$ 120.000,00 | 20.000 km | Automático</p>
+                    <button class="btn btn-details">Ver detalhes</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="vehicle-card">
+                    <img src="~/assets/images/honda-civic-2021.jpg" alt="Honda Civic 2021">
+                    <h5>Honda Civic 2021</h5>
+                    <p>R$ 110.000,00 | 30.000 km | Automático</p>
+                    <button class="btn btn-details">Ver detalhes</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="vehicle-card">
+                    <img src="~/assets/images/ford-mustang-2020.jpg" alt="Ford Mustang 2020">
+                    <h5>Ford Mustang 2020</h5>
+                    <p>R$ 280.000,00 | 15.000 km | Automático</p>
+                    <button class="btn btn-details">Ver detalhes</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

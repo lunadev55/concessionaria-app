@@ -1,0 +1,75 @@
+﻿@using ConcessionariaApp.Application.Dtos
+
+@model IEnumerable<ConcessionariaDto>
+
+@{
+    ViewData["Title"] = "Concessionárias";
+}
+
+<h2>Concessionárias</h2>
+
+@{
+    if (Model.Count() == 0)
+    {
+        <span style="display: block;margin-bottom: 20px;">Nenhuma concessionaria cadastrada.</span>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Capacidade</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var concessionaria in Model)
+                    {                        
+                        <tr>
+                            <td>@concessionaria.NomeConcessionaria</td>
+                            <td>@concessionaria.Cidade</td>
+                            <td>@concessionaria.CapacidadeMaximaVeiculos</td>
+                            <td>@concessionaria.Telefone</td>
+                            <td>@concessionaria.Email</td>
+                            <td>
+                                
+                                <a asp-action="Edit" asp-route-id="@concessionaria.Id" class="btn btn-warning btn-sm">Editar</a>
+                                <button class="btn btn-info btn-sm" onclick="detailsConcessionaria(@concessionaria.Id)">Detalhes</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteConcessionaria(@concessionaria.Id)">Excluir</button>
+                            </td>
+                        </tr>                        
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}
+<p>
+    <a asp-controller="Concessionaria" asp-action="Create" class="btn btn-primary">Nova Concessionaria</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Cancelar</a>
+</p>
+
+<script>
+    async function deleteConcessionaria(id) {
+        if (confirm("Tem certeza que deseja excluir esta concessionaria?")) {
+            const response = await fetch(`/Concessionaria/${id}`, { method: "DELETE" });
+
+            if (response.ok) {
+                location.reload();
+            } else {                
+                const errorData = await response.json(); 
+                const errorMessage = errorData.errors ? JSON.stringify(errorData.errors) : errorData.message || "Erro desconhecido.";
+                alert(errorData);
+            }
+        }
+    }
+    
+    function detailsConcessionaria(id) {
+        window.location.href = `/concessionaria/details/${id}`;
+    }
+</script>

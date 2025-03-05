@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.MVC", "ConcessionariaApp.MVC\ConcessionariaApp.MVC.csproj", "{B10A8AF1-6ABC-7578-FB60-22FAC1EADB44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.Tests", "ConcessionariaApp.Tests\ConcessionariaApp.Tests.csproj", "{F21E854F-5867-407C-88A8-16F283B76631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.Domain", "ConcessionariaApp.Domain\ConcessionariaApp.Domain.csproj", "{F6DDFBC1-4C1D-437F-952A-6F1FD83F1D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.Data", "ConcessionariaApp.Data\ConcessionariaApp.Data.csproj", "{6D765066-5041-44B4-9210-27A6F922AB34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.Infrastructure", "ConcessionariaApp.Infrastructure\ConcessionariaApp.Infrastructure.csproj", "{A3850E60-14E4-4B75-9635-66D054260337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcessionariaApp.Application", "ConcessionariaApp.Application\ConcessionariaApp.Application.csproj", "{301F6DF1-A9D7-4D48-A069-AD4ADCEA7C75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B10A8AF1-6ABC-7578-FB60-22FAC1EADB44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B10A8AF1-6ABC-7578-FB60-22FAC1EADB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B10A8AF1-6ABC-7578-FB60-22FAC1EADB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B10A8AF1-6ABC-7578-FB60-22FAC1EADB44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F21E854F-5867-407C-88A8-16F283B76631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21E854F-5867-407C-88A8-16F283B76631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21E854F-5867-407C-88A8-16F283B76631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21E854F-5867-407C-88A8-16F283B76631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DDFBC1-4C1D-437F-952A-6F1FD83F1D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DDFBC1-4C1D-437F-952A-6F1FD83F1D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DDFBC1-4C1D-437F-952A-6F1FD83F1D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DDFBC1-4C1D-437F-952A-6F1FD83F1D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D765066-5041-44B4-9210-27A6F922AB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D765066-5041-44B4-9210-27A6F922AB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D765066-5041-44B4-9210-27A6F922AB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D765066-5041-44B4-9210-27A6F922AB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3850E60-14E4-4B75-9635-66D054260337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3850E60-14E4-4B75-9635-66D054260337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3850E60-14E4-4B75-9635-66D054260337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3850E60-14E4-4B75-9635-66D054260337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{301F6DF1-A9D7-4D48-A069-AD4ADCEA7C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301F6DF1-A9D7-4D48-A069-AD4ADCEA7C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301F6DF1-A9D7-4D48-A069-AD4ADCEA7C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301F6DF1-A9D7-4D48-A069-AD4ADCEA7C75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E79F0945-942B-412A-90AC-2BD1F3D35615}
+	EndGlobalSection
+EndGlobal

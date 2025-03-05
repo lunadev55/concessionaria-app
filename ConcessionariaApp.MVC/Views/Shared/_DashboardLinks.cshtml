@@ -1,0 +1,53 @@
+﻿<div class="container mt-4">
+    <h2>Gerenciamento</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Veículos</h5>
+                        <p class="card-text">Gerencie os Veículos registrados.</p>
+                        <a asp-controller="Veiculo" asp-action="Create" class="btn btn-success">Adicionar Veículo</a>
+                        <a asp-controller="Veiculo" asp-action="Index" class="btn btn-primary">Listar Veículos</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Fabricantes</h5>
+                        <p class="card-text">Gerencie as Fabricantes registradas.</p>                        
+                        <a href="/Fabricante/Create" class="btn btn-success">Adicionar Fabricante</a>
+                        <a asp-controller="Fabricante" asp-action="Index" class="btn btn-primary">Listar Fabricantes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Concessionárias</h5>
+                        <p class="card-text">Gerencie as concessionárias registradas.</p>
+                        <a asp-controller="Concessionaria" asp-action="Create" class="btn btn-success">Adicionar Concessionária</a>
+                        <a asp-controller="Concessionaria" asp-action="Index" class="btn btn-primary">Listar Concessionárias</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Vendas</h5>
+                        <p class="card-text">Gerencie as vendas realizadas no sistema.</p>
+                        <a asp-controller="Venda" asp-action="Create" class="btn btn-success">Registrar Venda</a>
+                        <a asp-controller="Venda" asp-action="Index" class="btn btn-primary">Listar Vendas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

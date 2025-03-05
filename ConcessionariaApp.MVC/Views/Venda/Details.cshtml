@@ -1,0 +1,17 @@
+﻿@using ConcessionariaApp.Application.Dtos
+
+@model VendaDto
+
+@{
+    ViewData["Title"] = "Detalhes da Venda";
+}
+
+<h1>Detalhes da Venda</h1>
+
+<p><strong>Cliente:</strong> @Model.Cliente?.Nome</p>
+<p><strong>Veículo:</strong> @Model.Veiculo?.Modelo</p>
+<p><strong>Concessionária:</strong> @Model.Concessionaria?.NomeConcessionaria</p>
+<p><strong>Valor:</strong> @Model.PrecoVenda.ToString("C")</p>
+<p><strong>Data da Venda:</strong> @Model.DataVenda.ToShortDateString()</p>
+
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

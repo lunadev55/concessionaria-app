@@ -1,0 +1,30 @@
+﻿@using ConcessionariaApp.Application.Dtos
+@model FabricanteDto
+
+@{
+    ViewData["Title"] = "Detalhes do Fabricante";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Detalhes do Fabricante</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Nome:</strong> @Model.Nome</li>
+                <li class="list-group-item"><strong>País de Origem:</strong> @Model.PaisOrigem</li>
+                <li class="list-group-item"><strong>Ano de Fundação:</strong> @Model.AnoFundacao</li>
+                <li class="list-group-item"><strong>Website:</strong> <a href="@Model.Website" target="_blank">@Model.Website</a></li>
+            </ul>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>
