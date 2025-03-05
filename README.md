@@ -7,6 +7,12 @@ Este projeto é uma Web Application desenvolvida com .NET 9.0, utilizando a arqu
 ![fluxo-requisicao](https://github.com/user-attachments/assets/ea7edad9-312b-4797-b948-c6b13a9a3aef)
 ![diagrama-mssqlserver](https://github.com/user-attachments/assets/e339294e-f7a5-486a-a755-6a6435560c3e)
 
+Segue links para vídeos com explicação sobre Arquitetura, Código e Aplicação funcionando:
+
+https://www.loom.com/share/51eb6f6c38894ef2854abd08ba5d8807
+https://www.loom.com/share/8f140ff409374767930a9c0d10354807
+https://www.loom.com/share/cdbab0552b514fe28d3d8fb533b7e7bc
+
 ## Tecnologias Utilizadas
 
 - **.NET 9.0**
